@@ -1,6 +1,6 @@
 # Day_01
 
-## Commands
+## Redis Commands
 
 ### Primitive Values
 
@@ -81,3 +81,59 @@ Display All fields in key:
 Delete field in key:
 
 `HDEL KEY FIELD`
+
+## Postgres Commands
+
+### Basic Commands
+
+---
+
+Start Postgres:
+
+`psql -U postgres`
+
+Create a User:
+
+`CREATE USER username WITH PASSWORD password;`
+
+Create Database:
+
+`CREATE DATABASE database_name;`
+
+Drop Database:
+
+`DROP DATABASE database_name;`
+
+Grant Privileges:
+
+`GRANT [PRIVILEGES] ON database_name TO username;`
+
+Connect to a Database:
+
+`\c database_name;`
+
+List all Databases:
+
+`\l;`
+
+Create a table:
+
+```sql
+CREATE TABLE table_name(
+    COLUMN1 DATATYPE CONSTRAINTS,
+    COLUMN2 DATATYPE CONSTRAINTS,...
+    COLUMNN DATATYPE CONSTRAINTS,
+);
+```
+
+List all Tables in current Database:
+
+`\d;`
+
+Display Structure of table:
+
+`\d table_name;`
+
+Drop a Table:
+
+`DROP TABLE table_name;`
