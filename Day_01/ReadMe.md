@@ -114,7 +114,7 @@ Connect to a Database:
 
 List all Databases:
 
-`\l;`
+`\l`
 
 Create a table:
 
@@ -128,11 +128,11 @@ CREATE TABLE table_name(
 
 List all Tables in current Database:
 
-`\d;`
+`\d`
 
 Display Structure of table:
 
-`\d table_name;`
+`\d table_name`
 
 Drop a Table:
 
