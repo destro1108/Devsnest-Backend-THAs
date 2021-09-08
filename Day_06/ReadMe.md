@@ -1,10 +1,27 @@
 # Day 5
 
-## CRUD Application using FS Module Synchronous Methods
+## CRUD Application using FS Module Asynchronous Methods
 
 ---
 
+First Install required dependencies:
+
+```
+    npm install OR
+    yarn
+```
+
+Then Compile the .ts file:
+
+```
+    npm tsc index.ts OR
+    yarn tsc inde.tsg
+```
+
+Then use with the following args:
+
 ```js
+
 Usage:
           node index.js [command] [name] [val]
 
