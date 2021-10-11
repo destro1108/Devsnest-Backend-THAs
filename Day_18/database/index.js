@@ -22,6 +22,7 @@ sequelize.sync({ alter: true });
 (async () => {
   try {
     await sequelize.authenticate();
+    sequelize.query("CREATE EXTENSION IF NOT EXISTS pg_trgm;");
     console.log("DB Connected!");
   } catch (err) {
     console.error("Cannot Connect to DB");

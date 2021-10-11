@@ -26,35 +26,42 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/trgm", async (req, res) => {
-  try {
-    const artists = await Artist.findAll({
-      attributes: {
-        include: [
-          sequelize.fn("similarity", sequelize.col("Name"), req.query.q),
-          "score",
-        ],
-      },
-      where: [
-        sequelize.where(
-          sequelize.fn("similarity", sequelize.col("Name"), req.query.q),
-          {
-            [Op.gt]: 0.3,
-          }
-        ),
-      ],
-    });
-    res.status(200).json({
-      count: artists.length,
-      items: artists,
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(400).json({
-      err,
-      success: false,
-    });
-  }
+router.get("/trgm", (req, res) => {
+  sequelize.query("CREATE EXTENSION IF NOT EXISITS pg_trgm;").then(() => {
+    sequelize
+      .query("SELECT * FROM pg_extension WHERE extname='pg_trgm';")
+      .then(() => {
+        Artist.findAll({
+          attributes: {
+            include: [
+              sequelize.fn("similarity", sequelize.col("Name"), req.query.q),
+              "score",
+            ],
+          },
+          where: [
+            sequelize.where(
+              sequelize.fn("similarity", sequelize.col("Name"), req.query.q),
+              {
+                [Op.gt]: 0.3,
+              }
+            ),
+          ],
+        })
+          .then((artists) => {
+            res.status(200).json({
+              count: artists.length,
+              items: artists,
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+            res.status(400).json({
+              err,
+              success: false,
+            });
+          });
+      });
+  });
 });
 
 router.get("/sound", async (req, res) => {
